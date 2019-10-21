@@ -1,0 +1,61 @@
+- name: Add an Apt signing key, uses whichever key is at the URL
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu bionic stable
+    state: present
+
+
+- name: install qemu
+  package:
+    name: "{{ kvm }}"
+    state: present
+
+- name: install lxc
+  package:
+    name: "{{ lxc }}"
+    state: present
+
+- name: install docker
+  package:
+    name: "{{ docker }}"
+    state: present
+
+- name: Create example directory
+  file:
+    path: /home/{{ ansible_user }}/examples/
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'
+
+- name: Сopy example files
+  copy:
+    src: "roles/virtualization/files/examples/"
+    dest: "/home/{{ ansible_user }}/examples/"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    #remote_src: True
+    #mode: 0644
+
+- name: Copy Dokuwiki
+  copy:
+    src: "roles/virtualization/files/dokuwiki.tgz"
+    dest: "/home/{{ ansible_user }}/"
+
+- name: Extract Dokuwiki
+  unarchive:
+    src: "/home/{{ ansible_user }}/dokuwiki.tgz"
+    dest: "/home/{{ ansible_user }}/"
+    remote_src: yes
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+
+- name: Set permissions Dokuwiki files
+  file:
+    path: /home/{{ ansible_user }}/dokuwiki/
+    owner: "www-data"
+    group: "www-data"
+    recurse: yes

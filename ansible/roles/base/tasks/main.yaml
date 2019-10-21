@@ -1,0 +1,28 @@
+- name: Installing base packages
+  package:
+    name: "{{ packages }}"
+    state: present
+
+- name: Remove packages
+  package:
+    name: "nano"
+    state: absent
+
+- name: Create group Docker
+  group:
+    name: docker
+    state: present
+
+- name: Configure users
+  user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    shell: /bin/zsh
+    append: yes
+
+- name: Configure user env
+  template:
+    src: "roles/base/templates/zshrc"
+    dest: "/home/{{ ansible_user }}/.zshrc"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"

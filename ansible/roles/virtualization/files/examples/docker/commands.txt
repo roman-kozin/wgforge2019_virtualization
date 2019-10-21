@@ -1,0 +1,11 @@
+# Build image
+docker build -t apache2.4-php7.0 ~/examples/docker
+
+# Create and start container from image (apache2.4-php7.0)
+docker run -p 10.0.2.15:80:80 -d --name wgforge2019 apache2.4-php7.0
+
+# Create and start container from image with DokuWiki site
+docker run -p 10.0.2.15:80:80 -d --name wgforge2019 -v /home/vagrant/dokuwiki/:/var/www/ apache2.4-php7.0
+
+# Connect to container in bash
+docker exec -it wgforge2019 /bin/bash

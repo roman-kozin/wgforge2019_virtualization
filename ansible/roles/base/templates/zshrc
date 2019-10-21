@@ -1,0 +1,59 @@
+HISTFILE=~/.histfile
+HISTSIZE=10000
+SAVEHIST=10000
+setopt  HIST_IGNORE_ALL_DUPS
+setopt  HIST_IGNORE_SPACE
+setopt  HIST_REDUCE_BLANKS
+setopt  AUTO_CD
+setopt  SH_WORD_SPLIT
+
+
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/gnom/.zshrc'
+
+export PROMPT="%F{yellow}%n@%U%m%u:%~{% if ansible_user == 'root' %}#{% else %}${% endif %} %F{white}"
+#export LS_COLORS='di=34;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34';
+RPROMPT='%F{green} %T %y%b'
+
+autoload -Uz compinit
+compinit
+
+#autoload -U compinit compinit zmodload zsh/complist zstyle ':completion:*' menu yes select
+
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+setopt AUTO_CD BSD_ECHO
+
+
+autoload -U predict-on
+zle -N predict-on
+zle -N predict-off
+bindkey "^X^Z" predict-on # C-x C-z
+bindkey "^Z" predict-off # C-z
+
+
+export LESS_TERMCAP_mb=$'\033[01;36m'
+export LESS_TERMCAP_md=$'\033[01;32m'
+export LESS_TERMCAP_me=$'\033[0m'
+export LESS_TERMCAP_mu=$'\033[01;37m'
+export LESS_TERMCAP_se=$'\033[0m'
+export LESS_TERMCAP_so=$'\033[01;44;33m'
+export LESS_TERMCAP_ue=$'\033[0m'
+export LESS_TERMCAP_us=$'\033[01;36m'
+export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
+export LESS=' -R '
+
+
+alias ls='ls --color=auto'
+alias grep='grep --color=always'
+alias ll='ls -lah --color=auto --group-directories-first --block-size=K'
+alias traceroute="grc --colour=auto traceroute"
+alias diff="grc --colour=auto diff"
+
+function ping_puny() { grc --colour=auto ping `idn2 "$@"` ;}
+function dig_puny() { grc --colour=auto dig `idn2 "$@"` ;}
+
+alias ping="ping_puny"
+alias dig="dig_puny"
+
+alias punycode="idn2"

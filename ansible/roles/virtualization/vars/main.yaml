@@ -1,0 +1,17 @@
+kvm:
+  - qemu
+  - qemu-kvm
+
+lxc:
+  - lxc
+  - lxc-dev
+  - lxc-templates
+  - python3
+  - python3-pip
+  - cgroup-tools
+  - cgroupfs-mount
+
+docker:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
