@@ -2,7 +2,7 @@
 ## Virtualization
 
 #### Установка
-* Устанавливаем VirtualBox
+* Устанавливаем [VirtualBox](https://www.virtualbox.org/)
 * Устанавливаем [Vagrant](https://www.vagrantup.com/)
 * Клонируем репозиторий и переходим в каталог с репозиторием. \
   `~$ cd ~/wgforge2019_virtualization/`
@@ -21,15 +21,11 @@
 
 
 ```
-~$ tree examples                                                                                                              10:13 pts/0
+~$ tree examples -P commands.txt                                                                                              10:41 pts/0
 examples
 ├── docker
 │   ├── commands.txt
-│   ├── conf
-│   │   ├── mpm_prefork.conf
-│   │   ├── rpaf.conf
-│   │   └── vhost.conf
-│   └── Dockerfile
+│   └── conf
 ├── kvm
 │   └── commands.txt
 └── lxc
