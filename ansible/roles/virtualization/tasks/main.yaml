@@ -23,6 +23,22 @@
     name: "{{ docker }}"
     state: present
 
+- name: install Docker Compose
+  copy:
+    src: "roles/virtualization/files/docker-compose"
+    dest: /usr/local/bin/docker-compose
+
+- name: Set permissions Docker Compose
+  file:
+    path: /usr/local/bin/docker-compose
+    mode: '0755'
+
+- name: Create symlink to Docker Compose
+  file:
+    src: /usr/local/bin/docker-compose
+    dest: /usr/bin/docker-compose
+    state: link
+
 - name: Create example directory
   file:
     path: /home/{{ ansible_user }}/examples/
@@ -40,18 +56,20 @@
     #remote_src: True
     #mode: 0644
 
-- name: Copy Dokuwiki
-  copy:
-    src: "roles/virtualization/files/dokuwiki.tgz"
-    dest: "/home/{{ ansible_user }}/"
+#- name: Copy Dokuwiki
+#  copy:
+#    src: "roles/virtualization/files/dokuwiki.tgz"
+#    dest: "/home/{{ ansible_user }}/"
+#    owner: "{{ ansible_user }}"
+#    group: "{{ ansible_user }}"
 
 - name: Extract Dokuwiki
   unarchive:
-    src: "/home/{{ ansible_user }}/dokuwiki.tgz"
+    #src: "/home/{{ ansible_user }}/dokuwiki.tgz"
+    src: roles/virtualization/files/dokuwiki.tgz
     dest: "/home/{{ ansible_user }}/"
-    remote_src: yes
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+    creates: /home/{{ ansible_user }}/dokuwiki/
+
 
 - name: Set permissions Dokuwiki files
   file:
