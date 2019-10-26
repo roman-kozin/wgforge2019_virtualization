@@ -7,7 +7,6 @@
     repo: deb https://download.docker.com/linux/ubuntu bionic stable
     state: present
 
-
 - name: install qemu
   package:
     name: "{{ kvm }}"
@@ -24,13 +23,9 @@
     state: present
 
 - name: install Docker Compose
-  copy:
-    src: "roles/virtualization/files/docker-compose"
+  get_url:
+    url: https://github.com/docker/compose/releases/download/1.24.1/docker-compose-Linux-x86_64
     dest: /usr/local/bin/docker-compose
-
-- name: Set permissions Docker Compose
-  file:
-    path: /usr/local/bin/docker-compose
     mode: '0755'
 
 - name: Create symlink to Docker Compose
@@ -53,23 +48,12 @@
     dest: "/home/{{ ansible_user }}/examples/"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
-    #remote_src: True
-    #mode: 0644
-
-#- name: Copy Dokuwiki
-#  copy:
-#    src: "roles/virtualization/files/dokuwiki.tgz"
-#    dest: "/home/{{ ansible_user }}/"
-#    owner: "{{ ansible_user }}"
-#    group: "{{ ansible_user }}"
 
 - name: Extract Dokuwiki
   unarchive:
-    #src: "/home/{{ ansible_user }}/dokuwiki.tgz"
     src: roles/virtualization/files/dokuwiki.tgz
     dest: "/home/{{ ansible_user }}/"
     creates: /home/{{ ansible_user }}/dokuwiki/
-
 
 - name: Set permissions Dokuwiki files
   file:
