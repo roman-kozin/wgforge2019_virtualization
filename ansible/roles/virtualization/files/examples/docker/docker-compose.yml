@@ -1,0 +1,10 @@
+version: '3'
+services:
+  apache2:
+    build: ~/examples/docker/
+    image: apache2.4-php7.0:latest
+    ports:
+      - "80:80"
+    volumes:
+      - '/home/vagrant/dokuwiki/:/var/www/'
+    restart: always
