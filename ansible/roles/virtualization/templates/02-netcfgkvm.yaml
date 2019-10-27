@@ -1,0 +1,15 @@
+network:
+  version: 2
+
+  bridges:
+    br0:
+      interfaces: []
+      addresses: [10.0.5.1/24]
+      mtu: 1500
+      nameservers:
+        addresses: [127.0.0.53, 8.8.8.8]
+      parameters:
+        stp: true
+        forward-delay: 4
+      dhcp4: no
+      dhcp6: no

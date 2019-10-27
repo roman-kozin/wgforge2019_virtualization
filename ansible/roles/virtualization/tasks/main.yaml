@@ -12,6 +12,15 @@
     name: "{{ kvm }}"
     state: present
 
+- name: Configure qemu network
+  template:
+    src: "roles/virtualization/templates/02-netcfgkvm.yaml"
+    dest: "/etc/netplan/02-netcfgkvm.yaml"
+    owner: "root"
+    group: "root"
+    mode: '0644'
+  notify: apply network settings
+
 - name: install lxc
   package:
     name: "{{ lxc }}"

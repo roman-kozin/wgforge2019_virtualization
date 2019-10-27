@@ -1,6 +1,7 @@
 kvm:
   - qemu
   - qemu-kvm
+  - bridge-utils
 
 lxc:
   - lxc
@@ -15,3 +16,8 @@ docker:
   - docker-ce
   - docker-ce-cli
   - containerd.io
+
+kvm-net:
+    interfaces: []
+    addresses: 10.0.5.1/24
+    gateway4: ''

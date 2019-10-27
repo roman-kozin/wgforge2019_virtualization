@@ -1,0 +1,3 @@
+- name: apply network settings
+  shell: netplan generate && netplan apply
+  become: yes
