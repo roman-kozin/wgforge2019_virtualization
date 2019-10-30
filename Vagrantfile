@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.network "forwarded_port", guest: 80, host: 80, protocol: "tcp"
   config.vm.network "forwarded_port", guest: 443, host: 443, protocol: "tcp"
-  config.vm.network "forwarded_port", guest: 5900, host: 5901, protocol: "tcp"
+  config.vm.network "forwarded_port", guest: 5900, host: 5900, protocol: "tcp"
 
   config.vm.box_check_update = false
 
