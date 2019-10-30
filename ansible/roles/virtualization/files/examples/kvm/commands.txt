@@ -1,0 +1,15 @@
+qemu-system-x86_64 -m 512M -drive if=virtio,index=0,file=/home/vagrant/debian.qcow,media=disk -cdrom /home/vagrant/bionicpup64-8.0-uefi.iso -boot d,menu=on -vnc 0.0.0.0:0,password -nographic -k en-us -net nic,macaddr=DE:AD:BE:EF:E0:00,model=virtio -net tap,ifname=tap0 -monitor /dev/tty -usbdevice tablet
+
+
+qemu-system-x86_64 \
+-m 512M \
+-drive if=virtio,index=0,file=/home/vagrant/debian.qcow,media=disk \
+-cdrom /home/vagrant/bionicpup64-8.0-uefi.iso \
+-boot d,menu=on \
+-vnc 0.0.0.0:0,password \
+-nographic \
+-k en-us \
+-net nic,macaddr=DE:AD:BE:EF:E0:00,model=virtio \
+-net tap,ifname=tap0 \
+-monitor /dev/tty \
+-usbdevice tablet
