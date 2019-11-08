@@ -11,6 +11,7 @@ lxc:
   - python3-pip
   - cgroup-tools
   - cgroupfs-mount
+  - yum
 
 docker:
   - docker-ce

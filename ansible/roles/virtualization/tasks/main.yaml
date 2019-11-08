@@ -26,6 +26,22 @@
     name: "{{ lxc }}"
     state: present
 
+- name: Configuration Global settins LXC
+  template:
+    src: "roles/virtualization/templates/lxc-usernet"
+    dest: "/etc/lxc/lxc-usernet"
+    owner: "root"
+    group: "root"
+    mode: '0644'
+
+- name: Configuration non privileged LXC
+  template:
+    src: "roles/virtualization/templates/lxc-default.conf"
+    dest: "/home/{{ansible_user}}/.config/lxc/default.conf"
+    owner: "{{ansible_user}}"
+    group: "{{ansible_user}}"
+    mode: '0644'
+
 - name: install docker
   package:
     name: "{{ docker }}"

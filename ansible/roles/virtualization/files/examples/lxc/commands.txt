@@ -1,0 +1,103 @@
+===== Use standart lxc commands =====
+### Standart LXC commands
+lxc-create
+lxc-start
+lxc-console
+lxc-destroy
+lxc-stop
+lxc-execute
+lxc-monitor
+lxc-cgroup
+lxc-ls
+lxc-info
+lxc-freeze
+lxc-unfreeze
+
+#### Show templates list
+sudo ls /usr/share/lxc/templates/
+
+#### Creat privileged\non privileged containers
+
+##### User templates
+sudo lxc-create -t centos -n wgforge-centos
+sudo lxc-create -t ubuntu -n wgforge-ubuntu
+
+##### Use images
+lxc-create -t download -n wgforge
+lxc-create -t download -n wgforge-centos -t centos -r 7 --arch amd64
+lxc-create -t download -n wgforge-ubuntu -t ubuntu -r trusty --arch amd64
+lxc-create -t download -n wgforge-gentoo -t gentoo -r current --arch amd64
+
+
+#### Set cgroup limits
+##### Set memory limit
+sudo lxc-cgroup -n wgforge-ubuntu memory.limit_in_bytes 128M
+
+
+
+===== Use LXD =====
+### Main command
+lxc
+  - alias       Manage command aliases
+  - cluster     Manage cluster members
+  - config      Manage container and server configuration options
+  - console     Attach to container consoles
+  - copy        Copy containers within or in between LXD instances
+  - delete      Delete containers and snapshots
+  - exec        Execute commands in containers
+  - file        Manage files in containers
+  - help        Help about any command
+  - image       Manage images
+  - info        Show container or server information
+  - launch      Create and start containers from images
+  - list        List containers
+  - move        Move containers within or in between LXD instances
+  - network     Manage and attach containers to networks
+  - profile     Manage profiles
+  - publish     Publish containers as images
+  - remote      Manage the list of remote servers
+  - rename      Rename containers and snapshots
+  - restart     Restart containers
+  - restore     Restore containers from snapshots
+  - snapshot    Create container snapshots
+  - start       Start containers
+  - stop        Stop containers
+  - storage     Manage storage pools and volumes
+
+
+### LXD initialization
+lxd init
+
+### Show avaliable images
+lxc image list images:
+lxc image list images: 'debian'
+lxc image list images: 'gentoo'
+
+### Create and start container
+lxc launch ubuntu:16.04
+lxc launch images:centos/7/amd64
+lxc launch images:gentoo/current/amd64
+
+#### Set password for user in container
+lxc exec $containername -- bash
+
+#### Attach to container console
+lxc console $containername
+
+#### Set cgroup limits
+
+##### Set CPU limit
+lxc config set my-container limits.cpu 2
+
+##### Set memory limit
+lxc config set my-container limits.memory 256MB
+
+##### Set Disk I/O limits
+lxc config device set my-container root limits.read 30MB
+lxc config device set my-container root.limits.write 10MB
+
+
+
+### Documents URL
+##### https://linuxcontainers.org/lxd/docs/master/
+##### https://linuxcontainers.org/lxd/docs/master/containers

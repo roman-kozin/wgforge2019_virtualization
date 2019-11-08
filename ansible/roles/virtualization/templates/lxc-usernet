@@ -1,0 +1,2 @@
+# USERNAME TYPE BRIDGE COUNT
+{{ansible_user}} veth lxcbr0 10000
