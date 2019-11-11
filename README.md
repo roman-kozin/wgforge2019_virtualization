@@ -1,11 +1,18 @@
 # WGforge2019
 ## Virtualization
 
-#### Установка
+#### Установка для Linux и macOS
 * Устанавливаем [VirtualBox](https://www.virtualbox.org/)
 * Устанавливаем [Vagrant](https://www.vagrantup.com/)
+
+#### Установка для Windows 10
+* Устанавливаем [WSL (Windows Subsystem for Linux)](https://docs.microsoft.com/en-us/windows/wsl/wsl2-install) с ОС Ubuntu
+* Затем внутри WSL, устанавливаем [Vagrant](https://www.vagrantup.com/)
+
+#### Запуск виртуальной машины.
 * Клонируем репозиторий и переходим в каталог с репозиторием. \
-  `~$ cd ~/wgforge2019_virtualization/`
+* `git clone https://github.com/roman-kozin/wgforge2019_virtualization.git`
+* `~$ cd ~/wgforge2019_virtualization/`
 * `~$ vagrant up`
 
 *Ждем пока создастся vm и накатится конфигурация через ansible.* \
@@ -21,7 +28,7 @@
 
 
 ```
-~$ tree examples -P commands.txt                                                                                              10:41 pts/0
+~$ tree examples -P commands.txt
 examples
 ├── docker
 │   ├── commands.txt
@@ -30,3 +37,4 @@ examples
 │   └── commands.txt
 └── lxc
     └── commands.txt
+```
