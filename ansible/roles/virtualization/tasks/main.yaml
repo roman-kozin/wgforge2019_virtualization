@@ -34,6 +34,14 @@
     group: "root"
     mode: '0644'
 
+- name: Creating directory for configuration non privileged LXC
+  file:
+    path: "/home/{{ansible_user}}/.config/lxc/"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'
+
 - name: Configuration non privileged LXC
   template:
     src: "roles/virtualization/templates/lxc-default.conf"
@@ -48,16 +56,10 @@
     state: present
 
 - name: install Docker Compose
-  get_url:
-    url: https://github.com/docker/compose/releases/download/1.24.1/docker-compose-Linux-x86_64
-    dest: /usr/local/bin/docker-compose
-    mode: '0755'
-
-- name: Create symlink to Docker Compose
-  file:
-    src: /usr/local/bin/docker-compose
-    dest: /usr/bin/docker-compose
-    state: link
+  pip:
+    name: docker-compose
+    state: present
+    version: 1.24.1
 
 - name: Create example directory
   file:
